@@ -1,0 +1,46 @@
+Router>
+Router>en
+Router#conf
+Router#configure t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int gi0/0.2
+Router(config-subif)#enc
+Router(config-subif)#encapsulation dot1Q 2
+Router(config-subif)#ip ad 192.168.13.62 255.255.255.192
+Router(config-subif)#int gi0/0.3
+Router(config-subif)#encapsulation dot1Q 3
+Router(config-subif)#ip ad 192.168.13.126 255.255.255.192
+Router(config-subif)#int gi0/0.4
+Router(config-subif)#encapsulation dot1Q 4
+Router(config-subif)#ip ad 192.168.13.142 255.255.255.240
+Router(config-subif)#int gi0/0.13
+Router(config-subif)#encapsulation dot1Q 13
+Router(config-subif)#ip ad 192.168.13.158 255.255.255.240
+Router(config-subif)#ip dhcp pool VLAN2
+Router(dhcp-config)#network 192.168.13.0 255.255.255.192
+Router(dhcp-config)#def
+Router(dhcp-config)#default-router 192.168.13.62
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+Router(config)#ip dhcp pool VLAN3
+Router(dhcp-config)#network 192.168.13.64 255.255.255.192
+Router(dhcp-config)#default-router 192.168.13.126
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+Router(config)#ip dhcp pool VLAN4
+Router(dhcp-config)#network 192.168.13.128 255.255.255.240
+Router(dhcp-config)#default-router 192.168.13.142
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+Router(config)#ip dhcp pool VLAN13
+Router(dhcp-config)#network 192.168.13.144 255.255.255.240
+Router(dhcp-config)#default-router 192.168.13.158
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+Router>enable
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#no ip dhcp pool VLAN 2
+Router(config)#no ip dhcp pool VLAN 3
+Router(config)#no ip dhcp pool VLAN 4
+Router(config)#no ip dhcp pool VLAN 13
