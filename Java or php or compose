@@ -1,0 +1,357 @@
+u13@u13-VirtualBox:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+u13@u13-VirtualBox:~$ mkdir 123
+u13@u13-VirtualBox:~$ cd 123
+u13@u13-VirtualBox:~/123$ vim 123.java
+u13@u13-VirtualBox:~/123$ cat 123.java
+class 123 {
+	public static void main (String[] arg) {
+		for(int i = 0; i < 10; i++)
+			System.out.println("Otvet")
+	}
+} 
+u13@u13-VirtualBox:~/123$ vim Dockerfile 
+
+[1]+  Остановлен    vim Dockerfile
+u13@u13-VirtualBox:~/123$ cat Dockerfile
+cat: Dockerfile: Нет такого файла или каталога
+u13@u13-VirtualBox:~/123$ vim Dockerfile 
+u13@u13-VirtualBox:~/123$ cat Dockerfile
+FROM openjdk
+
+u13@u13-VirtualBox:~/123$ vim Dockerfile 
+u13@u13-VirtualBox:~/123$ cat Dockerfile
+FROM openjdk
+COPY . /java
+WORKDIR /java
+RUN javac 123.java
+CMD ["java","123"]
+u13@u13-VirtualBox:~/123$ docker build -t testjava:0.1 .
+[+] Building 22.5s (8/8) FINISHED                                docker:default
+ => [internal] load build definition from Dockerfile                       1.2s
+ => => transferring dockerfile: 117B                                       0.0s
+ => [internal] load metadata for docker.io/library/openjdk:latest          0.0s
+ => [internal] load .dockerignore                                          1.3s
+ => => transferring context: 2B                                            0.0s
+ => [internal] load build context                                          4.3s
+ => => transferring context: 12.61kB                                       0.0s
+ => [1/4] FROM docker.io/library/openjdk:latest                            4.1s
+ => [2/4] COPY . /java                                                     1.9s
+ => [3/4] WORKDIR /java                                                    2.5s
+ => [4/4] RUN javac 123.java                                               8.4s
+ => exporting to image
+ => => exporting layers
+ => => writing image sha256:0b9a15c4df7952add9df857c345f7d6fc31c198a3f50c73c552efcc9d71c6b3
+ => => naming to docker.io/library/testjava:0.1
+u13@u13-VirtualBox:~/123$ docker images 
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+testjava     latest    0b9a15c4df79   1 days ago     470MB
+joomla       latest    29595f1bada0   6 days ago     760MB
+adminer      latest    d1ce2535a665   10 days ago    121MB
+php          latest    cd0e124311ea   2 weeks ago    547MB
+postgres     latest    76e3e031d245   4 weeks ago    438MB
+mariadb      latest    a914eff5d2eb   6 weeks ago    336MB
+alpine       latest    aded1e1a5b37   6 weeks ago    7.83MB
+wordpress    latest    52bb3e73152a   6 weeks ago    701MB
+nginx        latest    53a18edff809   7 weeks ago    192MB
+python       latest    e6c8fe2e1108   7 weeks ago    1.02GB
+mediawiki    latest    346df660949e   7 weeks ago    1.01GB
+ubuntu       24.04     a04dc4851cbc   2 months ago   78.1MB
+ubuntu       latest    a04dc4851cbc   2 months ago   78.1MB
+phpmyadmin   latest    052506f2de4d   2 months ago   570MB
+httpd        latest    0de612e99135   2 months ago   148MB
+mysql        latest    fa262c3a6564   2 months ago   797MB
+redis        latest    43724892d6db   2 months ago   117MB
+fedora       latest    aa6787b90fe6   4 months ago   158MB
+ubuntu       20.04     6013ae1a63c2   5 months ago   72.8MB
+openjdk      latest    71260f256d19   2 years ago    470MB
+u13@u13-VirtualBox:~/123$ docker info 
+Client: Docker Engine - Community
+ Version:    28.0.1
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.21.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.33.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 9
+  Running: 0
+  Paused: 0
+  Stopped: 9
+ Images: 18
+ Server Version: 28.0.1
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: bcc810d6b9066471b0b6fa75f557a15a1cbf31bb
+ runc version: v1.2.4-0-g6c52b3f
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.8.0-52-generic
+ Operating System: Ubuntu 22.04.5 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 1
+ Total Memory: 1.922GiB
+ Name: u13-VirtualBox
+ ID: a211904a-306b-437b-885e-8cf8b5b3eca2
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+u13@u13-VirtualBox:~/123$ mkdir 1234
+u13@u13-VirtualBox:~/123$ cd 1234
+u13@u13-VirtualBox:~/123/1234$ vim pr002.php
+u13@u13-VirtualBox:~/123/1234$ vim index.php
+u13@u13-VirtualBox:~/123/1234$ vim Dockerfile
+
+[3]+  Остановлен    vim Dockerfile
+u13@u13-VirtualBox:~/123/1234$ vim pr002.php
+u13@u13-VirtualBox:~/123/1234$ vim Dockerfile
+u13@u13-VirtualBox:~/123/1234$ docker build -t app-php:0. .
+[+] Building 3.5s (1/1) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       1.2s
+ => => transferring dockerfile: 125B                                       0.0s
+Dockerfile:5
+--------------------
+   3 |     COPY . / var/www/html
+   4 |     EXPOSE 80
+   5 | >>> ~            
+   6 |     
+--------------------
+ERROR: failed to solve: dockerfile parse error on line 5: unknown instruction: ~
+u13@u13-VirtualBox:~/123/1234$ vim Dockerfile
+u13@u13-VirtualBox:~/123/1234$ docker build -t app-php:0. .
+[+] Building 95.0s (8/8) FINISHED                                docker:default
+ => [internal] load build definition from Dockerfile                       0.4s
+ => => transferring dockerfile: 116B                                       0.0s
+ => [internal] load metadata for docker.io/library/php:7.2-apache          4.7s
+ => [internal] load .dockerignore                                          1.1s
+ => => transferring context: 2B                                            0.0s
+ => [1/3] FROM docker.io/library/php:7.2-apache@sha256:4dc0f0115acf8c2f0  75.3s
+ => => resolve docker.io/library/php:7.2-apache@sha256:4dc0f0115acf8c2f0d  1.6s
+ => => sha256:4dc0f0115acf8c2f0df69295ae822e49f5ad5fe8497 1.65kB / 1.65kB  0.0s
+ => => sha256:25417b6c9c2e1a52b551ba89087f4d07c216f587847 3.24kB / 3.24kB  0.0s
+ => => sha256:c61d277263e19d2ce30a6bae41115c811eb0f9274 13.18kB / 13.18kB  0.0s
+ => => sha256:6ec7b7d162b24bd6df88abde89ceb6d7bbc2be92 27.10MB / 27.10MB  13.7s
+ => => sha256:db606474d60ce31604505c7d6dad9a66cb42f3818fca738 225B / 225B  2.0s
+ => => sha256:afb30f0cd8e0ff78b5eecdc2d9365a50441ad83c 76.65MB / 76.65MB  34.0s
+ => => sha256:3bb2e805159413e5278b859f7fbb86ddfc99e667cb705d5 225B / 225B  3.2s
+ => => sha256:4c761b44e2ccbff3f10b254b21bb00a52dfd2691 18.68MB / 18.68MB  30.4s
+ => => sha256:c2199db96575122fd559c29b619a2773fe9069e0266312 434B / 434B  14.7s
+ => => extracting sha256:6ec7b7d162b24bd6df88abde89ceb6d7bbc2be927f025c9d  1.5s
+ => => sha256:1b9a9381eea8f93068e8043f18ea59b709c07256e2f909 487B / 487B  15.6s
+ => => sha256:fd07bbc59d347c16686f107676436a2281e41280 12.65MB / 12.65MB  32.3s
+ => => extracting sha256:db606474d60ce31604505c7d6dad9a66cb42f3818fca7388  0.0s
+ => => sha256:72b73ab27698b55aa309173abd0cdd758291b9feaac313 494B / 494B  31.6s
+ => => sha256:983308f4f0d6304dc6cecde8fd66ba5a94a08873 13.82MB / 13.82MB  35.4s
+ => => sha256:6c13f026e6da09e10ca2edb704b335a62bac29e549 2.27kB / 2.27kB  33.2s
+ => => sha256:e5e6cd16368920e691da5b8791184d7a8d579dd5cd5e8c 248B / 248B  34.9s
+ => => sha256:5c5516e56582a30bd2e69c32d17a169ed7227900318e9d 210B / 210B  35.5s
+ => => extracting sha256:afb30f0cd8e0ff78b5eecdc2d9365a50441ad83c5db5f1e8  4.8s
+ => => sha256:154729f6ba8609ef7d5af1bfad81efe814cbbca1850983 897B / 897B  35.8s
+ => => extracting sha256:3bb2e805159413e5278b859f7fbb86ddfc99e667cb705d5d  0.0s
+ => => extracting sha256:4c761b44e2ccbff3f10b254b21bb00a52dfd26919ad9e3f7  0.6s
+ => => extracting sha256:c2199db96575122fd559c29b619a2773fe9069e0266312a6  0.0s
+ => => extracting sha256:1b9a9381eea8f93068e8043f18ea59b709c07256e2f90962  0.0s
+ => => extracting sha256:fd07bbc59d347c16686f107676436a2281e4128033f105ca  0.4s
+ => => extracting sha256:72b73ab27698b55aa309173abd0cdd758291b9feaac31342  0.0s
+ => => extracting sha256:983308f4f0d6304dc6cecde8fd66ba5a94a08873a3b8205e  1.0s
+ => => extracting sha256:6c13f026e6da09e10ca2edb704b335a62bac29e549a2d0b3  0.0s
+ => => extracting sha256:e5e6cd16368920e691da5b8791184d7a8d579dd5cd5e8c53  0.0s
+ => => extracting sha256:5c5516e56582a30bd2e69c32d17a169ed7227900318e9d7b  0.0s
+ => => extracting sha256:154729f6ba8609ef7d5af1bfad81efe814cbbca185098349  0.0s
+ => [internal] load build context                                          2.5s
+ => => transferring context: 12.55kB                                       0.0s
+ => [2/3] WORKDIR /var/www/html                                            2.8s
+ => [3/3] COPY . / var/www/html                                            3.2s
+ => exporting to image                                                     3.2s
+ => => exporting layers                                                    2.2s
+ => => writing image sha256:8d682e9a8c7a61f35e11c7bb37f1a9c0b42be42041730  0.1s
+ => => naming to docker.io/library/app-php:0.                              0.2s
+u13@u13-VirtualBox:~/123/1234$ docker build -t app-php:0.1 .
+[+] Building 6.7s (8/8) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.4s
+ => => transferring dockerfile: 116B                                       0.0s
+ => [internal] load metadata for docker.io/library/php:7.2-apache          1.7s
+ => [internal] load .dockerignore                                          0.5s
+ => => transferring context: 2B                                            0.0s
+ => [1/3] FROM docker.io/library/php:7.2-apache@sha256:4dc0f0115acf8c2f0d  0.0s
+ => [internal] load build context                                          0.5s
+ => => transferring context: 122B                                          0.0s
+ => CACHED [2/3] WORKDIR /var/www/html                                     0.0s
+ => CACHED [3/3] COPY . / var/www/html                                     0.0s
+ => exporting to image                                                     0.5s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:8d682e9a8c7a61f35e11c7bb37f1a9c0b42be42041730  0.1s
+ => => naming to docker.io/library/app-php:0.1                             0.2s
+u13@u13-VirtualBox:~/123/1234$ docker images 
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+app-php      0.        8d682e9a8c7a   45 seconds ago   410MB
+app-php      0.1       8d682e9a8c7a   45 seconds ago   410MB
+testjava     latest    0b9a15c4df79   1 days ago       470MB
+joomla       latest    29595f1bada0   6 days ago       760MB
+adminer      latest    d1ce2535a665   10 days ago      121MB
+php          latest    cd0e124311ea   2 weeks ago      547MB
+postgres     latest    76e3e031d245   4 weeks ago      438MB
+mariadb      latest    a914eff5d2eb   6 weeks ago      336MB
+alpine       latest    aded1e1a5b37   6 weeks ago      7.83MB
+wordpress    latest    52bb3e73152a   6 weeks ago      701MB
+nginx        latest    53a18edff809   7 weeks ago      192MB
+python       latest    e6c8fe2e1108   7 weeks ago      1.02GB
+mediawiki    latest    346df660949e   7 weeks ago      1.01GB
+ubuntu       24.04     a04dc4851cbc   2 months ago     78.1MB
+ubuntu       latest    a04dc4851cbc   2 months ago     78.1MB
+phpmyadmin   latest    052506f2de4d   2 months ago     570MB
+httpd        latest    0de612e99135   2 months ago     148MB
+mysql        latest    fa262c3a6564   2 months ago     797MB
+redis        latest    43724892d6db   2 months ago     117MB
+fedora       latest    aa6787b90fe6   4 months ago     158MB
+ubuntu       20.04     6013ae1a63c2   5 months ago     72.8MB
+openjdk      latest    71260f256d19   2 years ago      470MB
+
+u13@u13-VirtualBox:~/123/1234$ vim docker-compose.yml
+u13@u13-VirtualBox:~/123/1234$ cat docker-compose.yml
+
+services:
+        phpmyadmin:
+                image: phpmyadmin
+                restart: always
+                ports:
+                - 8080:80
+                environment:
+                        - PMA_ARBITARY=1
+        db:
+                image: mariadb:10.11
+                restart: always
+                environment:
+                 MYSQL_ROOT_PASSWORD: u13
+u13@u13-VirtualBox:~/123/1234$ docker-compose build
+u13@u13-VirtualBox:~/123/1234$ docker-compose up
+[+] Running 9/9
+ ✔ db Pulled                                                                                                                                                                               6.4s 
+   ✔ 9cb31e2e37ea Already exists                                                                                                                                                           0.0s 
+   ✔ b5d0c07e1b39 Pull complete                                                                                                                                                            0.4s 
+   ✔ 146766f55375 Pull complete                                                                                                                                                            1.7s 
+   ✔ 7e9e7bda14da Pull complete                                                                                                                                                            1.7s 
+   ✔ 4e0d8410ccaa Pull complete                                                                                                                                                            1.7s 
+   ✔ e54392e56360 Pull complete                                                                                                                                                            4.9s 
+   ✔ c1f62eab2318 Pull complete                                                                                                                                                            4.9s 
+   ✔ d645c8b36c27 Pull complete                                                                                                                                                            5.0s 
+[+] Running 3/3
+ ✔ Network prj1_default         Created                                                                                                                                                    0.0s 
+ ✔ Container prj1-phpmyadmin-1  Created                                                                                                                                                    0.3s 
+ ✔ Container prj1-db-1          Created                                                                                                                                                    0.2s 
+Attaching to db-1, phpmyadmin-1
+db-1          | 2025-03-27 07:06:47+00:00 [Note] [Entrypoint]: Entrypoint script for MariaDB Server 1:10.11.11+maria~ubu2204 started.
+db-1          | 2025-03-27 07:06:47+00:00 [Warn] [Entrypoint]: /sys/fs/cgroup///memory.pressure not writable, functionality unavailable to MariaDB
+db-1          | 2025-03-27 07:06:47+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+db-1          | 2025-03-27 07:06:47+00:00 [Note] [Entrypoint]: Entrypoint script for MariaDB Server 1:10.11.11+maria~ubu2204 started.
+phpmyadmin-1  | AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message
+db-1          | 2025-03-27 07:06:47+00:00 [Note] [Entrypoint]: Initializing database files
+phpmyadmin-1  | AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message
+db-1          | 2025-03-27  7:06:48 0 [Warning] mariadbd: io_uring_queue_init() failed with errno 1
+db-1          | 2025-03-27  7:06:48 0 [Warning] InnoDB: liburing disabled: falling back to innodb_use_native_aio=OFF
+phpmyadmin-1  | [Thu Mar 27 07:06:48.242113 2025] [mpm_prefork:notice] [pid 1:tid 1] AH00163: Apache/2.4.62 (Debian) PHP/8.2.28 configured -- resuming normal operations
+phpmyadmin-1  | [Thu Mar 27 07:06:48.242154 2025] [core:notice] [pid 1:tid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+db-1          | 2025-03-27 07:06:48+00:00 [Note] [Entrypoint]: Database files initialized
+db-1          | 2025-03-27 07:06:48+00:00 [Note] [Entrypoint]: Starting temporary server
+db-1          | 2025-03-27 07:06:48+00:00 [Note] [Entrypoint]: Waiting for server startup
+db-1          | 2025-03-27  7:06:49 0 [Note] Starting MariaDB 10.11.11-MariaDB-ubu2204 source revision e69f8cae1a15e15b9e4f5e0f8497e1f17bdc81a4 server_uid 72+4ASMvYxproTQgRqIDplDA1XA= as process 88
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: Using transactional memory
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: Number of transaction pools: 1
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: Using AVX512 instructions
+db-1          | 2025-03-27  7:06:49 0 [Note] mariadbd: O_TMPFILE is not supported on /tmp (disabling future attempts)
+db-1          | 2025-03-27  7:06:49 0 [Warning] mariadbd: io_uring_queue_init() failed with errno 1
+db-1          | 2025-03-27  7:06:49 0 [Warning] InnoDB: liburing disabled: falling back to innodb_use_native_aio=OFF
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: Initializing buffer pool, total size = 128.000MiB, chunk size = 2.000MiB
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: Completed initialization of buffer pool
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: File system buffers for log disabled (block size=512 bytes)
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: End of log at LSN=45502
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: 128 rollback segments are active.
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: Setting file './ibtmp1' size to 12.000MiB. Physically writing the file full; Please wait ...
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: File './ibtmp1' size is now 12.000MiB.
+db-1          | 2025-03-27  7:06:49 0 [Note] InnoDB: log sequence number 45502; transaction id 14
+db-1          | 2025-03-27  7:06:49 0 [Note] Plugin 'FEEDBACK' is disabled.
+db-1          | 2025-03-27  7:06:49 0 [Note] mariadbd: ready for connections.
+db-1          | Version: '10.11.11-MariaDB-ubu2204'  socket: '/run/mysqld/mysqld.sock'  port: 0  mariadb.org binary distribution
+db-1          | 2025-03-27 07:06:50+00:00 [Note] [Entrypoint]: Temporary server started.
+db-1          | 2025-03-27 07:06:51+00:00 [Note] [Entrypoint]: Securing system users (equivalent to running mysql_secure_installation)
+db-1          | 
+db-1          | 2025-03-27 07:06:51+00:00 [Note] [Entrypoint]: Stopping temporary server
+db-1          | 2025-03-27  7:06:51 0 [Note] mariadbd (initiated by: unknown): Normal shutdown
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: FTS optimize thread exiting.
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Starting shutdown...
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Buffer pool(s) dump completed at 250327  7:06:51
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Removed temporary tablespace data file: "./ibtmp1"
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Shutdown completed; log sequence number 47092; transaction id 15
+db-1          | 2025-03-27  7:06:51 0 [Note] mariadbd: Shutdown complete
+db-1          | 2025-03-27 07:06:51+00:00 [Note] [Entrypoint]: Temporary server stopped
+db-1          | 
+db-1          | 2025-03-27 07:06:51+00:00 [Note] [Entrypoint]: MariaDB init process done. Ready for start up.
+db-1          | 
+db-1          | 2025-03-27  7:06:51 0 [Note] Starting MariaDB 10.11.11-MariaDB-ubu2204 source revision e69f8cae1a15e15b9e4f5e0f8497e1f17bdc81a4 server_uid 72+4ASMvYxproTQgRqIDplDA1XA= as process 1
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Using transactional memory
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Number of transaction pools: 1
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Using AVX512 instructions
+db-1          | 2025-03-27  7:06:51 0 [Note] mariadbd: O_TMPFILE is not supported on /tmp (disabling future attempts)
+db-1          | 2025-03-27  7:06:51 0 [Warning] mariadbd: io_uring_queue_init() failed with errno 1
+db-1          | 2025-03-27  7:06:51 0 [Warning] InnoDB: liburing disabled: falling back to innodb_use_native_aio=OFF
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Initializing buffer pool, total size = 128.000MiB, chunk size = 2.000MiB
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Completed initialization of buffer pool
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: File system buffers for log disabled (block size=512 bytes)
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: End of log at LSN=47092
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: 128 rollback segments are active.
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Setting file './ibtmp1' size to 12.000MiB. Physically writing the file full; Please wait ...
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: File './ibtmp1' size is now 12.000MiB.
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: log sequence number 47092; transaction id 15
+db-1          | 2025-03-27  7:06:51 0 [Note] Plugin 'FEEDBACK' is disabled.
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+db-1          | 2025-03-27  7:06:51 0 [Note] InnoDB: Buffer pool(s) load completed at 250327  7:06:51
+db-1          | 2025-03-27  7:06:51 0 [Warning] You need to use --log-bin to make --expire-logs-days or --binlog-expire-logs-seconds work.
+db-1          | 2025-03-27  7:06:51 0 [Note] Server socket created on IP: '0.0.0.0'.
+db-1          | 2025-03-27  7:06:51 0 [Note] Server socket created on IP: '::'.
+db-1          | 2025-03-27  7:06:51 0 [Note] mariadbd: ready for connections.
+db-1          | Version: '10.11.11-MariaDB-ubu2204'  socket: '/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
+phpmyadmin-1  | 172.18.0.1 - - [27/Mar/2025:07:06:56 +0000] "GET / HTTP/1.1" 200 6857 "https://special-system-r497g4rvwjxcw746.github.dev/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36"
+phpmyadmin-1  | 172.18.0.1 - - [27/Mar/2025:07:06:58 +0000] "GET /themes/pmahomme/jquery/jquery-ui.css HTTP/1.1" 200 8768 "https://special-system-r497g4rvwjxcw746-8080.app.github.dev/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36"
+phpmyadmin-1  | 172.18.0.1 - - [27/Mar/2025:07:06:58 +0000] "GET /js/vendor/codemirror/lib/codemirror.css?v=5.2.2 HTTP/1.1" 200 2792 "https://special-system-r497g4rvwjxcw746-8080.app.github.dev/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36"
+phpmyadmin-1  | 172.18.0.1 - - [27/Mar/2025:07:06:58 +0000] "GET /js/vendor/codemirror/addon/hint/show-hint.css?v=5.2.2 HTTP/1.1" 200 612 "https://special-system-r497g4rvwjxcw746-8080.app.github.dev/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36"
+phpmyadmin-1  | 172.18.0.1 - - [27/Mar/2025:07:06:58 +0000] "GET /js/vendor/codemirror/addon/lint/lint.css?v=5.2.2 HTTP/1.1" 200 1578 "https://special-system-r497g4rvwjxcw746-8080.app.github.dev/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36"
+phpmyadmin-1  | 172.18.0.1 - - [27/Mar/2025:07:06:58 +0000] "GET /js/vendor/jquery/jquery.min.js?v=5.2.2 HTTP/1.1" 200 30653 "https://special-system-r497g4rvwjxcw746-8080.app.github.dev/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36"
+phpmyadmin-1  | 172.18.0.1 - - [27/Mar/2025:07:06:59 +0000] "GET /js/vendor/jquery/jquery-migrate.min.js?v=5.2.2 HTTP/1.1" 200 5346 "https://special-system-r497g4rvwjxcw746-8080.app.github.dev/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36"
+phpmyadmin-1  | 172.18.0.1 - - [27/Mar/2025:07:06:59 +0000] "GET /themes/pmahomme/css/theme.css?v=5.2.2 HTTP/1.1" 200 67331 "https://special-system-r497g4rvwjxcw746-8080.app.github.dev/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 YaBrowser/24.12.0.0 Safari/537.36"
+Gracefully stopping... (press Ctrl+C again to force)
+[+] Stopping 2/2
+ ✔ Container prj1-phpmyadmin-1  Stopped                                                                                                                                                    1.1s 
+ ✔ Container prj1-db-1          Stopped         
