@@ -135,67 +135,6 @@ u13@u13-VirtualBox:~/123/1234$ vim Dockerfile
 [3]+  Остановлен    vim Dockerfile
 u13@u13-VirtualBox:~/123/1234$ vim pr002.php
 u13@u13-VirtualBox:~/123/1234$ vim Dockerfile
-u13@u13-VirtualBox:~/123/1234$ docker build -t app-php:0. .
-[+] Building 3.5s (1/1) FINISHED                                 docker:default
- => [internal] load build definition from Dockerfile                       1.2s
- => => transferring dockerfile: 125B                                       0.0s
-Dockerfile:5
---------------------
-   3 |     COPY . / var/www/html
-   4 |     EXPOSE 80
-   5 | >>> ~            
-   6 |     
---------------------
-ERROR: failed to solve: dockerfile parse error on line 5: unknown instruction: ~
-u13@u13-VirtualBox:~/123/1234$ vim Dockerfile
-u13@u13-VirtualBox:~/123/1234$ docker build -t app-php:0. .
-[+] Building 95.0s (8/8) FINISHED                                docker:default
- => [internal] load build definition from Dockerfile                       0.4s
- => => transferring dockerfile: 116B                                       0.0s
- => [internal] load metadata for docker.io/library/php:7.2-apache          4.7s
- => [internal] load .dockerignore                                          1.1s
- => => transferring context: 2B                                            0.0s
- => [1/3] FROM docker.io/library/php:7.2-apache@sha256:4dc0f0115acf8c2f0  75.3s
- => => resolve docker.io/library/php:7.2-apache@sha256:4dc0f0115acf8c2f0d  1.6s
- => => sha256:4dc0f0115acf8c2f0df69295ae822e49f5ad5fe8497 1.65kB / 1.65kB  0.0s
- => => sha256:25417b6c9c2e1a52b551ba89087f4d07c216f587847 3.24kB / 3.24kB  0.0s
- => => sha256:c61d277263e19d2ce30a6bae41115c811eb0f9274 13.18kB / 13.18kB  0.0s
- => => sha256:6ec7b7d162b24bd6df88abde89ceb6d7bbc2be92 27.10MB / 27.10MB  13.7s
- => => sha256:db606474d60ce31604505c7d6dad9a66cb42f3818fca738 225B / 225B  2.0s
- => => sha256:afb30f0cd8e0ff78b5eecdc2d9365a50441ad83c 76.65MB / 76.65MB  34.0s
- => => sha256:3bb2e805159413e5278b859f7fbb86ddfc99e667cb705d5 225B / 225B  3.2s
- => => sha256:4c761b44e2ccbff3f10b254b21bb00a52dfd2691 18.68MB / 18.68MB  30.4s
- => => sha256:c2199db96575122fd559c29b619a2773fe9069e0266312 434B / 434B  14.7s
- => => extracting sha256:6ec7b7d162b24bd6df88abde89ceb6d7bbc2be927f025c9d  1.5s
- => => sha256:1b9a9381eea8f93068e8043f18ea59b709c07256e2f909 487B / 487B  15.6s
- => => sha256:fd07bbc59d347c16686f107676436a2281e41280 12.65MB / 12.65MB  32.3s
- => => extracting sha256:db606474d60ce31604505c7d6dad9a66cb42f3818fca7388  0.0s
- => => sha256:72b73ab27698b55aa309173abd0cdd758291b9feaac313 494B / 494B  31.6s
- => => sha256:983308f4f0d6304dc6cecde8fd66ba5a94a08873 13.82MB / 13.82MB  35.4s
- => => sha256:6c13f026e6da09e10ca2edb704b335a62bac29e549 2.27kB / 2.27kB  33.2s
- => => sha256:e5e6cd16368920e691da5b8791184d7a8d579dd5cd5e8c 248B / 248B  34.9s
- => => sha256:5c5516e56582a30bd2e69c32d17a169ed7227900318e9d 210B / 210B  35.5s
- => => extracting sha256:afb30f0cd8e0ff78b5eecdc2d9365a50441ad83c5db5f1e8  4.8s
- => => sha256:154729f6ba8609ef7d5af1bfad81efe814cbbca1850983 897B / 897B  35.8s
- => => extracting sha256:3bb2e805159413e5278b859f7fbb86ddfc99e667cb705d5d  0.0s
- => => extracting sha256:4c761b44e2ccbff3f10b254b21bb00a52dfd26919ad9e3f7  0.6s
- => => extracting sha256:c2199db96575122fd559c29b619a2773fe9069e0266312a6  0.0s
- => => extracting sha256:1b9a9381eea8f93068e8043f18ea59b709c07256e2f90962  0.0s
- => => extracting sha256:fd07bbc59d347c16686f107676436a2281e4128033f105ca  0.4s
- => => extracting sha256:72b73ab27698b55aa309173abd0cdd758291b9feaac31342  0.0s
- => => extracting sha256:983308f4f0d6304dc6cecde8fd66ba5a94a08873a3b8205e  1.0s
- => => extracting sha256:6c13f026e6da09e10ca2edb704b335a62bac29e549a2d0b3  0.0s
- => => extracting sha256:e5e6cd16368920e691da5b8791184d7a8d579dd5cd5e8c53  0.0s
- => => extracting sha256:5c5516e56582a30bd2e69c32d17a169ed7227900318e9d7b  0.0s
- => => extracting sha256:154729f6ba8609ef7d5af1bfad81efe814cbbca185098349  0.0s
- => [internal] load build context                                          2.5s
- => => transferring context: 12.55kB                                       0.0s
- => [2/3] WORKDIR /var/www/html                                            2.8s
- => [3/3] COPY . / var/www/html                                            3.2s
- => exporting to image                                                     3.2s
- => => exporting layers                                                    2.2s
- => => writing image sha256:8d682e9a8c7a61f35e11c7bb37f1a9c0b42be42041730  0.1s
- => => naming to docker.io/library/app-php:0.                              0.2s
 u13@u13-VirtualBox:~/123/1234$ docker build -t app-php:0.1 .
 [+] Building 6.7s (8/8) FINISHED                                 docker:default
  => [internal] load build definition from Dockerfile                       0.4s
