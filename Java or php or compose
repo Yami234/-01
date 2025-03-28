@@ -176,6 +176,10 @@ fedora       latest    aa6787b90fe6   4 months ago     158MB
 ubuntu       20.04     6013ae1a63c2   5 months ago     72.8MB
 openjdk      latest    71260f256d19   2 years ago      470MB
 
+u13@u13-VirtualBox:~/123/1234$ docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+c6352bc1f24d   app-php:0.1   "docker-php-entrypoi…"   44 minutes ago   Up 44 minutes   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   phpapp
+
 u13@u13-VirtualBox:~/123/1234$ vim docker-compose.yml
 u13@u13-VirtualBox:~/123/1234$ cat docker-compose.yml
 
