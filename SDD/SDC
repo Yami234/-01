@@ -1,0 +1,122 @@
+u13@u13-VirtualBox:~$ ssh kuzukovvalera@192.168.13.10
+kuzukovvalera@192.168.13.10's password: 
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-134-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+  System information as of Сб 03 мая 2025 07:04:27 UTC
+
+  System load:  0.0087890625       Processes:                112
+  Usage of /:   56.1% of 11.21GB   Users logged in:          1
+  Memory usage: 13%                IPv4 address for docker0: 172.17.0.1
+  Swap usage:   0%                 IPv4 address for enp0s3:  192.168.13.10
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Расширенное поддержание безопасности (ESM) для Applications выключено.
+
+123 обновления может быть применено немедленно.
+36 из этих обновлений, являются стандартными обновлениями безопасности.
+Чтобы просмотреть дополнительные обновления выполните: apt list --upgradable
+
+1 дополнительное обновление безопасности может быть применено с помощью ESM Apps.
+Подробнее о включении службы ESM Apps at https://ubuntu.com/esm
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+
+Last login: Sat May  3 06:29:24 2025
+kuzukovvalera@123456789:~$ sudo fdisk -l /dev/sdd
+[sudo] password for kuzukovvalera: 
+Disk /dev/sdd: 5 GiB, 5368709120 bytes, 10485760 sectors
+Disk model: VBOX HARDDISK   
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: C55F50D3-4459-4930-88F9-648F13C8A2EF
+
+Device       Start     End Sectors  Size Type
+/dev/sdd1     2048 1050623 1048576  512M Linux filesystem
+/dev/sdd2  1050624 2099199 1048576  512M Linux LVM
+/dev/sdd3  2099200 2099711     512  256K Linux LVM
+/dev/sdd4  2101248 4198399 2097152    1G Linux LVM
+/dev/sdd5  4198400 5246975 1048576  512M Linux filesystem
+/dev/sdd6  5246976 6295551 1048576  512M Linux filesystem
+kuzukovvalera@123456789:~$ sudo fdisk -l /dev/sdc
+Disk /dev/sdc: 5 GiB, 5368709120 bytes, 10485760 sectors
+Disk model: VBOX HARDDISK   
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 0C9821C9-6CB7-4393-992C-355D85A50B5A
+
+Device       Start      End Sectors  Size Type
+/dev/sdc1  1050624  2099199 1048576  512M Linux filesystem
+/dev/sdc3  2099200  4196351 2097152    1G Linux filesystem
+/dev/sdc4  4196352  5244927 1048576  512M Linux LVM
+/dev/sdc5  5244928  7342079 2097152    1G Linux LVM
+/dev/sdc6  7342080 10485726 3143647  1,5G Linux filesystem
+kuzukovvalera@123456789:~$ sudo pvdisplay
+  --- Physical volume ---
+  PV Name               /dev/sda3
+  VG Name               ubuntu-vg
+  PV Size               <23,00 GiB / not usable 0   
+  Allocatable           yes 
+  PE Size               4,00 MiB
+  Total PE              5887
+  Free PE               2944
+  Allocated PE          2943
+  PV UUID               3GxcaV-Fs0m-8RnV-57zb-rSMJ-KV4I-8XokuD
+   
+kuzukovvalera@123456789:~$ sudo lvdisplay
+  --- Logical volume ---
+  LV Path                /dev/ubuntu-vg/ubuntu-lv
+  LV Name                ubuntu-lv
+  VG Name                ubuntu-vg
+  LV UUID                vAslkd-zhyY-LDb0-KrzE-nJdB-OYw2-AoAwxO
+  LV Write Access        read/write
+  LV Creation host, time ubuntu-server, 2025-01-30 04:45:11 +0000
+  LV Status              available
+  # open                 1
+  LV Size                <11,50 GiB
+  Current LE             2943
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:0
+   
+kuzukovvalera@123456789:~$ sudo fdisk -l | grep sd
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+/dev/sda1     2048     4095     2048   1M BIOS boot
+/dev/sda2     4096  4198399  4194304   2G Linux filesystem
+/dev/sda3  4198400 52426751 48228352  23G Linux filesystem
+Disk /dev/sdb: 5 GiB, 5368709120 bytes, 10485760 sectors
+/dev/sdb1          2048  2099199 2097152    1G 83 Linux
+/dev/sdb2       2099200  5244927 3145728  1,5G  5 Extended
+/dev/sdb3       5244928 10485759 5240832  2,5G 82 Linux swap / Solaris
+/dev/sdb5       2101248  5244927 3143680  1,5G  7 HPFS/NTFS/exFAT
+Disk /dev/sdc: 5 GiB, 5368709120 bytes, 10485760 sectors
+/dev/sdc1  1050624  2099199 1048576  512M Linux filesystem
+/dev/sdc3  2099200  4196351 2097152    1G Linux filesystem
+/dev/sdc4  4196352  5244927 1048576  512M Linux LVM
+/dev/sdc5  5244928  7342079 2097152    1G Linux LVM
+/dev/sdc6  7342080 10485726 3143647  1,5G Linux filesystem
+Disk /dev/sdd: 5 GiB, 5368709120 bytes, 10485760 sectors
+/dev/sdd1     2048 1050623 1048576  512M Linux filesystem
+/dev/sdd2  1050624 2099199 1048576  512M Linux LVM
+/dev/sdd3  2099200 2099711     512  256K Linux LVM
+/dev/sdd4  2101248 4198399 2097152    1G Linux LVM
+/dev/sdd5  4198400 5246975 1048576  512M Linux filesystem
+/dev/sdd6  5246976 6295551 1048576  512M Linux filesystem
+Disk /dev/sde: 5 GiB, 5368709120 bytes, 10485760 sectors
