@@ -1,0 +1,597 @@
+u13@u13-VirtualBox:~$ sudo fdisk -l | grep sd
+[sudo] пароль для u13: 
+Диск /dev/sda: 25 GiB, 26843545600 байт, 52428800 секторов
+/dev/sda1     2048     4095     2048     1M BIOS boot
+/dev/sda2     4096  1054719  1050624   513M EFI
+/dev/sda3  1054720 52426751 51372032  24,5G Файловая система Linux
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+u13@u13-VirtualBox:~$ ?
+?: команда не найдена
+u13@u13-VirtualBox:~$ sudo gdisk /dev/sdb
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries in memory.
+
+Command (? for help): ?
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): o
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2.5G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2): 
+First sector (34-10485726, default = 4096) or {+-}size{KMGTP}: 
+Last sector (4096-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdb.
+The operation has completed successfully.
+u13@u13-VirtualBox:~$ sudo mkfs.ext4 dev/sdb1
+mke2fs 1.46.5 (30-Dec-2021)
+The file dev/sdb1 does not exist and no size was specified.
+u13@u13-VirtualBox:~$ fdisk -l
+fdisk: невозможно открыть /dev/loop0: Отказано в доступе
+fdisk: невозможно открыть /dev/loop2: Отказано в доступе
+fdisk: невозможно открыть /dev/loop3: Отказано в доступе
+fdisk: невозможно открыть /dev/loop4: Отказано в доступе
+fdisk: невозможно открыть /dev/loop5: Отказано в доступе
+fdisk: невозможно открыть /dev/loop6: Отказано в доступе
+fdisk: невозможно открыть /dev/loop7: Отказано в доступе
+fdisk: невозможно открыть /dev/sda: Отказано в доступе
+fdisk: невозможно открыть /dev/sdb: Отказано в доступе
+fdisk: невозможно открыть /dev/sdc: Отказано в доступе
+fdisk: невозможно открыть /dev/loop8: Отказано в доступе
+fdisk: невозможно открыть /dev/loop9: Отказано в доступе
+fdisk: невозможно открыть /dev/loop10: Отказано в доступе
+fdisk: невозможно открыть /dev/loop11: Отказано в доступе
+fdisk: невозможно открыть /dev/loop12: Отказано в доступе
+fdisk: невозможно открыть /dev/loop13: Отказано в доступе
+fdisk: невозможно открыть /dev/loop14: Отказано в доступе
+fdisk: невозможно открыть /dev/loop15: Отказано в доступе
+fdisk: невозможно открыть /dev/loop16: Отказано в доступе
+fdisk: невозможно открыть /dev/loop17: Отказано в доступе
+u13@u13-VirtualBox:~$ sudo fdisk -l | gre[ sdb
+> 
+> sudo fdisk -l | grep sdb
+> ^C
+u13@u13-VirtualBox:~$ sudo fdisk -l | grep sdb
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1    2048     2049        2     1K Файловая система Linux
+/dev/sdb2    4096 10485726 10481631     5G Файловая система Linux
+u13@u13-VirtualBox:~$ sudo gdisk /dev/sdb
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR; using GPT.
+
+Command (? for help): n
+Partition number (3-128, default 3): 
+First sector (34-4095, default = 2050) or {+-}size{KMGTP}: 
+Last sector (2050-4095, default = 4095) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): d
+Partition number (1-3): 1
+
+Command (? for help): d
+Partition number (2-3): 2
+
+Command (? for help): d
+Using 3
+
+Command (? for help): 3
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2.5G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): 2
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): n
+Partition number (2-128, default 2): 2
+First sector (34-10485726, default = 4096) or {+-}size{KMGTP}: 
+Last sector (4096-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdb.
+The operation has completed successfully.
+u13@u13-VirtualBox:~$ 
+u13@u13-VirtualBox:~$ sudo fdisk -l | grep sdb
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1    2048     2049        2     1K Файловая система Linux
+/dev/sdb2    4096 10485726 10481631     5G Файловая система Linux
+u13@u13-VirtualBox:~$ sudo gdisk /dev/sdb
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR; using GPT.
+
+Command (? for help): d
+Partition number (1-2): 1
+
+Command (? for help): d 
+Using 2
+
+Command (? for help): 2
+b	back up GPT data to a file
+c	change a partition's name
+d	delete a partition
+i	show detailed information on a partition
+l	list known partition types
+n	add a new partition
+o	create a new empty GUID partition table (GPT)
+p	print the partition table
+q	quit without saving changes
+r	recovery and transformation options (experts only)
+s	sort partitions
+t	change a partition's type code
+v	verify disk
+w	write table to disk and exit
+x	extra functionality (experts only)
+?	print this menu
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2): 
+First sector (34-10485726, default = 4196352) or {+-}size{KMGTP}: 
+Last sector (4196352-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdb.
+The operation has completed successfully.
+u13@u13-VirtualBox:~$ sudo fdisk -l | grep sdb
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdb1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdb2  4196352 10485726 6289375     3G Файловая система Linux
+u13@u13-VirtualBox:~$ sudo mkfs.xfs /dev/sdb2
+sudo: mkfs.xfs: команда не найдена
+u13@u13-VirtualBox:~$ sudo apt install xfs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Пакет xfs недоступен, но упомянут в списке зависимостей другого
+пакета. Это может означать, что пакет отсутствует, устарел или
+доступен из источников, не упомянутых в sources.list
+
+E: Для пакета «xfs» не найден кандидат на установку
+u13@u13-VirtualBox:~$ sudo apt install xfs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Пакет xfs недоступен, но упомянут в списке зависимостей другого
+пакета. Это может означать, что пакет отсутствует, устарел или
+доступен из источников, не упомянутых в sources.list
+
+E: Для пакета «xfs» не найден кандидат на установку
+u13@u13-VirtualBox:~$ sudo apt install xfsprogs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Предлагаемые пакеты:
+  xfsdump attr quota
+Следующие НОВЫЕ пакеты будут установлены:
+  xfsprogs
+Обновлено 0 пакетов, установлено 1 новых пакетов, для удаления отмечено 0 пакетов, и 8 пакетов не обновлено.
+Необходимо скачать 870 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 2 851 kB.
+Пол:1 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main amd64 xfsprogs amd64 5.13.0-1ubuntu2.1 [870 kB]
+Получено 870 kB за 10с (88,2 kB/s)                                             
+Выбор ранее не выбранного пакета xfsprogs.
+(Чтение базы данных … на данный момент установлено 184746 файлов и каталогов.)
+Подготовка к распаковке …/xfsprogs_5.13.0-1ubuntu2.1_amd64.deb …
+Распаковывается xfsprogs (5.13.0-1ubuntu2.1) …
+Настраивается пакет xfsprogs (5.13.0-1ubuntu2.1) …
+update-initramfs: deferring update (trigger activated)
+Обрабатываются триггеры для man-db (2.10.2-1) …
+Обрабатываются триггеры для libc-bin (2.35-0ubuntu3.9) …
+Обрабатываются триггеры для initramfs-tools (0.140ubuntu13.4) …
+update-initramfs: Generating /boot/initrd.img-6.8.0-52-generic
+u13@u13-VirtualBox:~$ sudo mkfs.xfs /dev/sdb2
+meta-data=/dev/sdb2              isize=512    agcount=4, agsize=196543 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=786171, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+u13@u13-VirtualBox:~$ sudo gdisk /dev/sdc
+GPT fdisk (gdisk) version 1.0.8
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries in memory.
+
+Command (? for help): o
+This option deletes all partitions and creates a new protective MBR.
+Proceed? (Y/N): y
+
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-10485726, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-10485726, default = 10485726) or {+-}size{KMGTP}: +2G
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): n
+Partition number (2-128, default 2): 
+First sector (34-10485726, default = 4196352) or {+-}size{KMGTP}: 
+Last sector (4196352-10485726, default = 10485726) or {+-}size{KMGTP}: 
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+
+Command (? for help): w
+
+Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS!!
+
+Do you want to proceed? (Y/N): y
+OK; writing new GUID partition table (GPT) to /dev/sdc.
+The operation has completed successfully.
+u13@u13-VirtualBox:~$ sudo fdisk -l | grep sdc
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+/dev/sdc1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdc2  4196352 10485726 6289375     3G Файловая система Linux
+u13@u13-VirtualBox:~$ sudo apt install btr
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+E: Невозможно найти пакет btr
+u13@u13-VirtualBox:~$ sudo apt install btrfs-progs
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Предлагаемые пакеты:
+  duperemove
+Следующие НОВЫЕ пакеты будут установлены:
+  btrfs-progs
+Обновлено 0 пакетов, установлено 1 новых пакетов, для удаления отмечено 0 пакетов, и 8 пакетов не обновлено.
+Необходимо скачать 824 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 4 291 kB.
+Пол:1 http://ru.archive.ubuntu.com/ubuntu jammy/main amd64 btrfs-progs amd64 5.16.2-1 [824 kB]
+Получено 824 kB за 1с (1 251 kB/s)  
+Выбор ранее не выбранного пакета btrfs-progs.
+(Чтение базы данных … на данный момент установлено 184812 файлов и каталогов.)
+Подготовка к распаковке …/btrfs-progs_5.16.2-1_amd64.deb …
+Распаковывается btrfs-progs (5.16.2-1) …
+Настраивается пакет btrfs-progs (5.16.2-1) …
+Обрабатываются триггеры для initramfs-tools (0.140ubuntu13.4) …
+update-initramfs: Generating /boot/initrd.img-6.8.0-52-generic
+Обрабатываются триггеры для man-db (2.10.2-1) …
+u13@u13-VirtualBox:~$ sudo mkfs.btrfs /dev/sdc1
+btrfs-progs v5.16.2
+See http://btrfs.wiki.kernel.org for more information.
+
+Performing full device TRIM /dev/sdc1 (2.00GiB) ...
+NOTE: several default settings have changed in version 5.15, please make sure
+      this does not affect your deployments:
+      - DUP for metadata (-m dup)
+      - enabled no-holes (-O no-holes)
+      - enabled free-space-tree (-R free-space-tree)
+
+Label:              (null)
+UUID:               0c3c8ff7-8911-4fb9-81e9-d98ad95f382a
+Node size:          16384
+Sector size:        4096
+Filesystem size:    2.00GiB
+Block group profiles:
+  Data:             single            8.00MiB
+  Metadata:         DUP             102.38MiB
+  System:           DUP               8.00MiB
+SSD detected:       no
+Zoned device:       no
+Incompat features:  extref, skinny-metadata, no-holes
+Runtime features:   free-space-tree
+Checksum:           crc32c
+Number of devices:  1
+Devices:
+   ID        SIZE  PATH
+    1     2.00GiB  /dev/sdc1
+
+u13@u13-VirtualBox:~$ sudo mkfs.ext2 /dev/sdc2
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 786171 4k blocks and 196608 inodes
+Filesystem UUID: 9a736bd8-622c-4b63-a3a4-809d62e2dd05
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables: done                            
+Сохранение таблицы inod'ов: done                            
+Writing superblocks and filesystem accounting information: готово
+
+u13@u13-VirtualBox:~$ sudo apt install gparted
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Будут установлены следующие дополнительные пакеты:
+  gparted-common
+Предлагаемые пакеты:
+  dmraid gpart jfsutils kpartx mtools reiser4progs reiserfsprogs udftools
+  exfatprogs
+Следующие НОВЫЕ пакеты будут установлены:
+  gparted gparted-common
+Обновлено 0 пакетов, установлено 2 новых пакетов, для удаления отмечено 0 пакетов, и 8 пакетов не обновлено.
+Необходимо скачать 490 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 2 128 kB.
+Хотите продолжить? [Д/н] y
+Пол:1 http://ru.archive.ubuntu.com/ubuntu jammy/main amd64 gparted-common all 1.3.1-1ubuntu1 [71,9 kB]
+Пол:2 http://ru.archive.ubuntu.com/ubuntu jammy/main amd64 gparted amd64 1.3.1-1ubuntu1 [418 kB]
+Получено 490 kB за 2с (315 kB/s) 
+Выбор ранее не выбранного пакета gparted-common.
+(Чтение базы данных … на данный момент установлено 184856 файлов и каталогов.)
+Подготовка к распаковке …/gparted-common_1.3.1-1ubuntu1_all.deb …
+Распаковывается gparted-common (1.3.1-1ubuntu1) …
+Выбор ранее не выбранного пакета gparted.
+Подготовка к распаковке …/gparted_1.3.1-1ubuntu1_amd64.deb …
+Распаковывается gparted (1.3.1-1ubuntu1) …
+Настраивается пакет gparted-common (1.3.1-1ubuntu1) …
+Настраивается пакет gparted (1.3.1-1ubuntu1) …
+Обрабатываются триггеры для mailcap (3.70+nmu1ubuntu1) …
+Обрабатываются триггеры для desktop-file-utils (0.26-1ubuntu3) …
+Обрабатываются триггеры для hicolor-icon-theme (0.17-2) …
+Обрабатываются триггеры для gnome-menus (3.36.0-1ubuntu3) …
+Обрабатываются триггеры для man-db (2.10.2-1) …
+u13@u13-VirtualBox:~$ sudo gparted
+GParted 1.3.1
+configuration --enable-libparted-dmraid --enable-online-resize
+libparted 3.4
+sudo fdisk -l
+u13@u13-VirtualBox:~$ sudo fdisk -l
+Диск /dev/loop0: 4 KiB, 4096 байт, 8 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop2: 63,75 MiB, 66850816 байт, 130568 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop3: 73,89 MiB, 77475840 байт, 151320 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop4: 73,89 MiB, 77479936 байт, 151328 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop5: 237,21 MiB, 248729600 байт, 485800 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop6: 349,7 MiB, 366682112 байт, 716176 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop7: 257,99 MiB, 270524416 байт, 528368 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/sda: 25 GiB, 26843545600 байт, 52428800 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+Тип метки диска: gpt
+Идентификатор диска: 525CD345-A2EE-4ADA-AB93-8DDC16A433A6
+
+Устр-во     начало    Конец  Секторы Размер Тип
+/dev/sda1     2048     4095     2048     1M BIOS boot
+/dev/sda2     4096  1054719  1050624   513M EFI
+/dev/sda3  1054720 52426751 51372032  24,5G Файловая система Linux
+
+
+Диск /dev/sdb: 5 GiB, 5368709120 байт, 10485760 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+Тип метки диска: gpt
+Идентификатор диска: C43D7497-17E0-4CA7-A313-AC105C9EB4EE
+
+Устр-во     начало    Конец Секторы Размер Тип
+/dev/sdb1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdb2  4196352 10485726 6289375     3G Файловая система Linux
+
+
+Диск /dev/sdc: 5 GiB, 5368709120 байт, 10485760 секторов
+Disk model: VBOX HARDDISK   
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+Тип метки диска: gpt
+Идентификатор диска: 0898A6E9-7F55-4710-B0A7-6CF94A628795
+
+Устр-во     начало    Конец Секторы Размер Тип
+/dev/sdc1     2048  4196351 4194304     2G Файловая система Linux
+/dev/sdc2  4196352 10485726 6289375     3G Файловая система Linux
+
+
+Диск /dev/loop8: 485,52 MiB, 509100032 байт, 994336 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop9: 516,01 MiB, 541073408 байт, 1056784 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop10: 91,69 MiB, 96141312 байт, 187776 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop11: 12,2 MiB, 12791808 байт, 24984 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop12: 12,32 MiB, 12922880 байт, 25240 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop13: 44,45 MiB, 46604288 байт, 91024 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop14: 50,89 MiB, 53366784 байт, 104232 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop15: 452 KiB, 462848 байт, 904 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop16: 568 KiB, 581632 байт, 1136 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
+
+
+Диск /dev/loop17: 63,77 MiB, 66867200 байт, 130600 секторов
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 512 байт
+Размер I/O (минимальный/оптимальный): 512 байт / 512 байт
